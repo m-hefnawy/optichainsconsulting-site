@@ -238,6 +238,10 @@
         return;
       }
 
+      /* Sync _replyto hidden field so Formspree sets the correct reply-to address */
+      var replytoField = qs('#cf-replyto');
+      if (replytoField) replytoField.value = emailVal;
+
       /* Disable submit button while request is in-flight */
       var submitBtn    = contactForm.querySelector('button[type="submit"]');
       var submitBtnOriginalText = submitBtn ? submitBtn.textContent : null;
@@ -265,7 +269,7 @@
       })
         .then(function (response) {
           if (response.ok) {
-            showStatus('✓ Thank you for your message! We will be in touch shortly.', 'is-success');
+            showStatus('Thank you for your message, we shall contact you soon!', 'is-success');
             contactForm.reset();
           } else {
             return response.json().then(function (data) {

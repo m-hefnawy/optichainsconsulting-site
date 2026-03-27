@@ -613,6 +613,8 @@
             <form
               class="contact-form"
               id="contact-form"
+              action="https://formspree.io/info@optichainsconsulting.com"
+              method="POST"
               novalidate
               aria-label="Contact form"
             >
@@ -640,6 +642,8 @@
                   placeholder="you@company.com"
                   aria-required="true"
                 />
+                <!-- Formspree uses _replyto to set the reply-to address on forwarded emails -->
+                <input type="hidden" name="_replyto" id="cf-replyto" />
               </div>
 
               <div class="form-group">
