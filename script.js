@@ -238,30 +238,56 @@
         return;
       }
 
-      /*
-       * Form handling note:
-       * This is a static GitHub Pages site. The form does not submit to a backend.
-       * To enable real form submissions, replace this block with one of:
-       *
-       *   A) Formspree  – set the form action to "https://formspree.io/f/<your-id>"
-       *      and remove this event listener.
-       *
-       *   B) Netlify Forms – add `netlify` attribute to the <form> element
-       *      and remove this event listener.
-       *
-       *   C) Custom backend API – POST the FormData to your endpoint here.
-       *
-       * For now we show an informational message so the demo UX is clear.
-       */
-      showStatus(
-        '✓ Thank you for your message. This form is ready to be connected to ' +
-        'Formspree, Netlify Forms, or a custom backend. ' +
-        'For direct contact, please email info@optichainsconsulting.com.',
-        'is-info'
-      );
+      /* Disable submit button while request is in-flight */
+      var submitBtn    = contactForm.querySelector('button[type="submit"]');
+      var submitBtnOriginalText = submitBtn ? submitBtn.textContent : null;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
 
-      /* Reset form fields after showing the message */
-      contactForm.reset();
+      /*
+       * Submit form data via Formspree, which forwards submissions to
+       * info@optichainsconsulting.com.
+       *
+       * The legacy endpoint below works without a registered Formspree
+       * account – the first submission will trigger an activation email
+       * from Formspree to confirm the recipient address.
+       *
+       * Once you have a registered Formspree account you can replace this
+       * URL with your form-specific endpoint:
+       *   https://formspree.io/f/<your-form-id>
+       */
+      fetch('https://formspree.io/info@optichainsconsulting.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      })
+        .then(function (response) {
+          if (response.ok) {
+            showStatus('✓ Thank you for your message! We will be in touch shortly.', 'is-success');
+            contactForm.reset();
+          } else {
+            return response.json().then(function (data) {
+              var msg = (data && data.errors && data.errors.length)
+                ? data.errors.map(function (err) { return err.message; }).join(', ')
+                : 'Something went wrong. Please try again or email us directly at info@optichainsconsulting.com.';
+              showStatus(msg, 'is-error');
+            });
+          }
+        })
+        .catch(function () {
+          showStatus(
+            'Unable to send your message. Please check your connection or email us directly at info@optichainsconsulting.com.',
+            'is-error'
+          );
+        })
+        .finally(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = submitBtnOriginalText;
+          }
+        });
     });
   }
 
