@@ -262,7 +262,7 @@
        * URL with your form-specific endpoint:
        *   https://formspree.io/f/<your-form-id>
        */
-      fetch('https://formspree.io/info@optichainsconsulting.com', {
+      fetch('https://formspree.io/f/xpqoqpbq', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: new FormData(contactForm)
