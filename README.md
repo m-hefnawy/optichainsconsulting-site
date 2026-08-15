@@ -1,9 +1,8 @@
 # OptiChains Consulting – Website
 
-A production-ready static website for **OptiChains Consulting Services** built
-with plain HTML5, CSS3, and vanilla JavaScript. No frameworks, no build tools,
-no dependencies — just three files you can open in a browser or deploy to any
-static host in seconds.
+A production-ready website for **OptiChains Consulting**. The root HTML, CSS,
+and JavaScript files continue to support GitHub Pages, while the Next.js wrapper
+supports the connected Sites deployment from the same content source.
 
 ---
 
@@ -17,9 +16,11 @@ static host in seconds.
 
 ```
 optichainsconsulting-site/
-├── index.html   ← All page content and markup
-├── style.css    ← All styling (colors, layout, responsive rules)
-├── script.js    ← Mobile nav, scroll animations, form handling
+├── index.html   ← All page content and SEO markup
+├── style.css    ← Brand system, layout, and responsive rules
+├── script.js    ← Navigation, scroll effects, and form handling
+├── app/         ← Next.js deployment wrapper
+├── package.json ← Build configuration
 └── README.md    ← This file
 ```
 
@@ -48,6 +49,12 @@ npx serve .
 Then visit `http://localhost:8080`.
 
 ---
+
+## Homepage Structure
+
+The homepage is organized around an executive consulting journey: leadership
+challenges, services, industries, selected engagements, perspectives, delivery
+approach, OptiChains leadership, and contact.
 
 ## How to Edit Content
 
@@ -185,8 +192,8 @@ After DNS propagates (up to 24 hours), go to **Settings → Pages** and tick
 
 ## Notes
 
-- **No stock images** are used. Visual elements use pure CSS shapes,
-  SVG icons, and Unicode characters only.
+- The hero uses the project-owned `optichains-hero-v2.jpg` editorial image.
+- The website does not use certification badges or résumé-style credential blocks.
 - **No external libraries** are loaded. The site is fully self-contained.
 - **Accessibility**: semantic HTML, ARIA attributes, skip-link, focus states,
   and keyboard-friendly navigation are included.
@@ -194,4 +201,3 @@ After DNS propagates (up to 24 hours), go to **Settings → Pages** and tick
   URL placeholder are included in `<head>`.
 - **Form**: production form handling requires an external service
   (Formspree, Netlify Forms) or a custom backend API as described above.
-

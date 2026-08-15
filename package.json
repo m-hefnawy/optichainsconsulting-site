@@ -1,0 +1,25 @@
+{
+  "name": "optichains-consulting-site",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "mkdir -p public && cp style.css script.js optichains-hero-v2.jpg public/",
+    "build": "vinext build && node scripts/wrap-sites-worker.mjs && mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json",
+    "start": "vinext start"
+  },
+  "dependencies": {
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-server-dom-webpack": "19.2.8",
+    "vinext": "1.0.0-beta.5"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.52.1",
+    "@vitejs/plugin-react": "6.0.5",
+    "@vitejs/plugin-rsc": "0.5.34",
+    "vite": "8.2.1"
+  }
+}
