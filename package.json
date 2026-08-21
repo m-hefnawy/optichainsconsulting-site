@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "mkdir -p public && cp style.css script.js optichains-hero-v2.jpg public/",
+    "prebuild": "mkdir -p public && cp style.css script.js optichains-hero-v2.jpg optichains-logo.png favicon.png apple-touch-icon.png og.png public/",
     "build": "vinext build && node scripts/wrap-sites-worker.mjs && mkdir -p dist/.openai && cp .openai/hosting.json dist/.openai/hosting.json",
     "start": "vinext start"
   },
